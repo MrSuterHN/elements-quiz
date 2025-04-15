@@ -92,9 +92,10 @@ elements = {
 #first_n_elements = 0
 #elements_in_quiz = 0
 
-def get_random_elements(elements_dict, count, quiz_size):
-    sub_elements = dict(list(elements_dict.items())[:count])
-    return dict(random.sample(sub_elements.items(), quiz_size))
+def get_random_elements(elements_dict, first_n, quiz_size):
+    elements_subset = list(elements_dict.items())[:first_n]
+    sampled_elements = random.sample(elements_subset, quiz_size)
+    return dict(sampled_elements)
 
 def export_quiz_to_file(elements_dict, count, quiz_size, filename="element_quiz.txt"):
     selected = get_random_elements(elements_dict, count, quiz_size)
