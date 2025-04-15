@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 from quiz_logic import elements
 
 st.title("Study Elements")
@@ -66,7 +67,7 @@ if "selected_elements" in st.session_state:
             st.error(f"❌ Oops! The correct answer is: {symbol}")
     
     total_questions = correct_name_to_symbol + correct_symbol_to_name
-    
+
     print(all_answered)
     # Show confetti if all answers are correct
     if (
@@ -76,5 +77,5 @@ if "selected_elements" in st.session_state:
         total_questions > 0
     ):
         st.balloons()
-        st.success("🎉 Congratulations! You answered all questions correctly! 🎉"
-    )
+        st.success("🎉 Congratulations! You answered all questions correctly! 🎉")
+    
