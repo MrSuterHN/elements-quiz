@@ -24,6 +24,8 @@ st.session_state.end = st.number_input(
 if st.button("Start Studying"):
     if st.session_state.start > st.session_state.end:
         st.error("Start number must be less than or equal to end number.")
+        if "selected_elements" in st.session_state:
+            del st.session_state.selected_elements
     else:
         # Store selected elements in session state to persist across reruns
         st.session_state.selected_elements = list(elements.items())[st.session_state.start - 1:st.session_state.end]
@@ -32,6 +34,14 @@ if st.button("Start Studying"):
 if "selected_elements" in st.session_state:
     selected_elements = st.session_state.selected_elements
 
+    # Track correct answers
+    correct_symbol_to_name = 0
+    correct_name_to_symbol = 0
+    total_symbol_to_name = len(selected_elements)
+    total_name_to_symbol = len(selected_elements)
+    all_answered = True
+    
+
     # Symbol → Name Practice
     st.write("### Symbol → Name Practice:")
     for symbol, name in selected_elements:
@@ -39,6 +49,7 @@ if "selected_elements" in st.session_state:
         if user_answer:
             if user_answer.strip().lower() == name.lower():
                 st.success("✅ Correct!")
+                correct_symbol_to_name += 1
             else:
                 st.error(f"❌ Oops! The correct answer is: {name}")
 
@@ -46,8 +57,24 @@ if "selected_elements" in st.session_state:
     st.write("### Name → Symbol Practice:")
     for symbol, name in selected_elements:
         user_answer = st.text_input(f"What is the symbol for '{name}'?", key=f"symbol_{name}")
-        if user_answer:
-            if user_answer.strip().lower() == symbol.lower():
-                st.success("✅ Correct!")
-            else:
-                st.error(f"❌ Oops! The correct answer is: {symbol}")
+        if not user_answer:
+            all_answered = False
+        elif user_answer.strip().lower() == symbol.lower():
+            st.success("✅ Correct!")
+            correct_name_to_symbol += 1
+        else:
+            st.error(f"❌ Oops! The correct answer is: {symbol}")
+    
+    total_questions = correct_name_to_symbol + correct_symbol_to_name
+    
+    print(all_answered)
+    # Show confetti if all answers are correct
+    if (
+        all_answered and
+        correct_symbol_to_name == total_symbol_to_name and
+        correct_name_to_symbol == total_name_to_symbol and
+        total_questions > 0
+    ):
+        st.balloons()
+        st.success("🎉 Congratulations! You answered all questions correctly! 🎉"
+    )
