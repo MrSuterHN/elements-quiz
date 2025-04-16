@@ -70,7 +70,6 @@ if "selected_elements" in st.session_state:
     
     total_questions = correct_name_to_symbol + correct_symbol_to_name
 
-    print(all_answered)
     # Show confetti if all answers are correct
     if (
         all_answered and
