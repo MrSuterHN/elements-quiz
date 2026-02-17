@@ -8,6 +8,10 @@ const summaryEl = document.querySelector("#summary");
 const celebrateEl = document.querySelector("#celebrate");
 const symbolToNameEl = document.querySelector("#symbol-to-name");
 const nameToSymbolEl = document.querySelector("#name-to-symbol");
+const tabSymbolBtn = document.querySelector("#tab-symbol");
+const tabNameBtn = document.querySelector("#tab-name");
+const paneSymbol = document.querySelector("#pane-symbol");
+const paneName = document.querySelector("#pane-name");
 
 const STORAGE_KEY = "elements-quiz-state";
 
@@ -18,6 +22,7 @@ const state = {
   rangeEnd: 1,
   answers: {},
   started: false,
+  activeTab: "symbol",
 };
 
 let elements = [];
@@ -35,6 +40,7 @@ function loadState() {
     if (parsed.answers && typeof parsed.answers === "object") {
       state.answers = parsed.answers;
     }
+    if (typeof parsed.activeTab === "string") state.activeTab = parsed.activeTab;
   } catch (err) {
     console.warn("Failed to load saved state", err);
   }
@@ -69,12 +75,19 @@ function createQuestion(labelText, key, correctValue) {
 
   input.addEventListener("input", () => {
     state.answers[key] = input.value;
-    checkAnswer(input, feedback, correctValue);
     updateSummary();
     saveState();
   });
 
-  checkAnswer(input, feedback, correctValue);
+  input.addEventListener("blur", () => {
+    checkAnswer(input, feedback, correctValue);
+  });
+
+  // Clear feedback on focus so user can edit without seeing it
+  input.addEventListener("focus", () => {
+    feedback.textContent = "";
+    feedback.className = "feedback";
+  });
 
   wrapper.append(label, input, feedback);
   return wrapper;
@@ -91,6 +104,7 @@ function checkAnswer(input, feedback, correctValue) {
   if (value.toLowerCase() === correctValue.toLowerCase()) {
     feedback.textContent = "Correct";
     feedback.className = "feedback good";
+    confetti();
   } else {
     feedback.textContent = `Correct answer: ${correctValue}`;
     feedback.className = "feedback bad";
@@ -213,6 +227,7 @@ function resetQuiz() {
   state.rangeEnd = elements.length;
   state.answers = {};
   state.started = false;
+  state.activeTab = "symbol";
   saveState();
   quizEl.classList.add("hidden");
   summaryEl.textContent = "";
@@ -220,6 +235,23 @@ function resetQuiz() {
   setError("");
   startInput.value = state.start;
   endInput.value = state.end;
+}
+
+function switchTab(tab) {
+  state.activeTab = tab;
+  saveState();
+
+  if (tab === "symbol") {
+    paneSymbol.classList.add("active");
+    paneName.classList.remove("active");
+    tabSymbolBtn.classList.add("active");
+    tabNameBtn.classList.remove("active");
+  } else {
+    paneName.classList.add("active");
+    paneSymbol.classList.remove("active");
+    tabNameBtn.classList.add("active");
+    tabSymbolBtn.classList.remove("active");
+  }
 }
 
 async function init() {
@@ -239,10 +271,30 @@ async function init() {
 
   startButton.addEventListener("click", startStudying);
   resetButton.addEventListener("click", resetQuiz);
+  tabSymbolBtn.addEventListener("click", () => switchTab("symbol"));
+  tabNameBtn.addEventListener("click", () => switchTab("name"));
 
   if (state.started) {
     renderQuestions();
+    switchTab(state.activeTab);
   }
 }
 
+function setupBackToTop() {
+  const backToTopBtn = document.querySelector("#back-to-top");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.add("show");
+    } else {
+      backToTopBtn.classList.remove("show");
+    }
+  });
+
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
 init();
+setupBackToTop();

@@ -43,18 +43,25 @@
         <section id="celebrate" class="celebrate" aria-live="polite"></section>
 
         <section id="quiz" class="quiz hidden">
-          <div class="quiz-section">
-            <h2>Symbol -> Name</h2>
+          <div class="tab-nav">
+            <button id="tab-symbol" class="tab-btn active">Symbol → Name</button>
+            <button id="tab-name" class="tab-btn">Name → Symbol</button>
+          </div>
+
+          <div id="pane-symbol" class="quiz-pane active">
             <div id="symbol-to-name" class="question-list"></div>
           </div>
-          <div class="quiz-section">
-            <h2>Name -> Symbol</h2>
+
+          <div id="pane-name" class="quiz-pane">
             <div id="name-to-symbol" class="question-list"></div>
           </div>
         </section>
       </main>
+
+      <button id="back-to-top" class="back-to-top" aria-label="Back to top">↑ Top</button>
     </div>
 
     <script type="module" src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.0/dist/confetti.browser.min.js"></script>
   </body>
 </html>
