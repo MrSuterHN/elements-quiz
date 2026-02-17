@@ -104,7 +104,11 @@ function checkAnswer(input, feedback, correctValue) {
   if (value.toLowerCase() === correctValue.toLowerCase()) {
     feedback.textContent = "Correct";
     feedback.className = "feedback good";
-    confetti();
+    confetti(
+        {
+            colors: ['#0f0f0f', '#e4e2e2', '#ffd900']
+        }
+    );
   } else {
     feedback.textContent = `Correct answer: ${correctValue}`;
     feedback.className = "feedback bad";

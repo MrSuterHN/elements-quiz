@@ -225,9 +225,9 @@ button {
   position: fixed;
   bottom: 32px;
   right: 32px;
-  width: 128px;
+  width: 115px;
   height: 48px;
-  border-radius: 50%;
+  border-radius: 100%;
   background: var(--primary);
   color: white;
   border: none;
