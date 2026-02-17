@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Study Elements</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <p class="tag">Chemistry practice</p>
+        <h1>Study Elements</h1>
+        <p class="subhead">
+          Pick a range, practice both directions, and track your progress.
+        </p>
+      </header>
+
+      <main class="card">
+        <section class="controls">
+          <div class="field">
+            <label for="start">Start element number</label>
+            <input id="start" type="number" min="1" step="1" />
+          </div>
+          <div class="field">
+            <label for="end">End element number</label>
+            <input id="end" type="number" min="1" step="1" />
+          </div>
+          <div class="actions">
+            <button id="start-btn" class="primary">Start Studying</button>
+            <button id="reset-btn" class="ghost">Reset</button>
+          </div>
+          <p id="error" class="error" aria-live="polite"></p>
+        </section>
+
+        <section id="summary" class="summary" aria-live="polite"></section>
+        <section id="celebrate" class="celebrate" aria-live="polite"></section>
+
+        <section id="quiz" class="quiz hidden">
+          <div class="quiz-section">
+            <h2>Symbol -> Name</h2>
+            <div id="symbol-to-name" class="question-list"></div>
+          </div>
+          <div class="quiz-section">
+            <h2>Name -> Symbol</h2>
+            <div id="name-to-symbol" class="question-list"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
