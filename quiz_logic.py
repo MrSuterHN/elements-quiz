@@ -86,7 +86,7 @@ elements = {
     "Bi": "Bismuth",
     "Po": "Polonium",
     "At": "Astatine",
-    "Rn": "Radon"
+    "Rn": "Radon",
     "Fr": "Francium",
     "Ra": "Radium",
     "Ac": "Actinium",
