@@ -84,5 +84,13 @@
   {"symbol": "Bi", "name": "Bismuth"},
   {"symbol": "Po", "name": "Polonium"},
   {"symbol": "At", "name": "Astatine"},
-  {"symbol": "Rn", "name": "Radon"}
+  {"symbol": "Rn", "name": "Radon"},
+  {"symbol": "Fr", "name": "Francium"},
+  {"symbol": "Ra", "name": "Radium"},
+  {"symbol": "Ac", "name": "Actinium"},
+  {"symbol": "Th", "name": "Thorium"},
+  {"symbol": "Pa", "name": "Protactinium"},
+  {"symbol": "U", "name": "Uranium"},
+  {"symbol": "Np", "name": "Neptunium"},
+  {"symbol": "Pu", "name": "Plutonium"}
 ]
