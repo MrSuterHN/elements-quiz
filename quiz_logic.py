@@ -87,6 +87,14 @@ elements = {
     "Po": "Polonium",
     "At": "Astatine",
     "Rn": "Radon"
+    "Fr": "Francium",
+    "Ra": "Radium",
+    "Ac": "Actinium",
+    "Th": "Thorium",
+    "Pa": "Protactinium",
+    "U": "Uranium",
+    "Np": "Neptunium",
+    "Pu": "Plutonium"
 }
 
 #first_n_elements = 0
